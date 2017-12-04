@@ -1,0 +1,154 @@
+
+/* Background */
+body {
+	 background-image:url(../img/b5.png);background-repeat:repeat;
+}
+
+/* Barra de navegacao */
+.nav-tabs { border-bottom: 2px solid #DDD; }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { border-width: 0; }
+    .nav-tabs > li > a { border: none; color: #666; }
+        .nav-tabs > li.active > a, .nav-tabs > li > a:hover { border: none; color: #4285F4 !important; background: transparent; }
+        .nav-tabs > li > a::after { content: ""; background: #4285F4; height: 2px; position: absolute; width: 100%; left: 0px; bottom: -1px; transition: all 250ms ease 0s; transform: scale(0); }
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after { transform: scale(1); }
+.tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
+.tab-pane { padding: 15px 0; }
+.tab-content{padding:20px}
+
+.navbar-header img{
+	width:45px;
+	margin-left: 2px;
+}
+
+nav ul li {
+	width: 100px;
+	text-align: center;
+	font-size: large;
+}
+
+nav ul li a{
+	color: black;
+}
+
+#left {
+	margin-left: 10%;
+
+}
+
+#artistas label{
+	font-size: medium;
+	margin-right: 5px;
+}
+
+.artista-link, .modal-title{
+	text-align: center;
+}
+
+.img-thumbnail {
+	cursor: pointer;
+}
+
+.modal-body img {
+	max-width: 225px;
+	max-heigth: 225px;
+}
+
+.modal-content .modal-body .col-md-6{
+	position: relative;
+	margin-left: 7%;
+}
+
+.modal-content .modal-body .col-md-6 span a .ultima-musica{
+	max-width: 250px;
+}
+
+hr {
+	margin-top:5px;
+	margin-bottom:5px;
+	height:1px;
+	width:100%;
+	border-top:1px solid gray;
+}
+
+td .playlist-link:hover, .artista-link:hover{
+	color: black;
+	text-shadow: -2px -1px 10px rgba(84, 84, 84, 1);
+	cursor: pointer;
+}
+
+.modal-dialog{
+	width: 35%;
+}
+
+.heart:hover {
+	opacity: 0.5;
+}
+
+.favorito {
+	display: none;
+	position: relative;
+	right: 5%;
+	top: 20%;
+
+}
+
+div .imgContainer {
+	display: inline-block;
+	margin: 15px;
+}
+
+div .imgContainer:hover {
+	position: relative;
+}
+
+div .imgContainer:hover .img-thumbnail{
+	opacity: 0.5;
+}
+
+div .imgContainer:hover .favorito {
+	display: inline-block;
+	position: absolute;
+}
+
+.form-playlist button{
+	margin-left: 10px;
+}
+
+div .playlists{
+	margin-top: 20px;
+}
+
+div .playlists table{
+	margin-left: 15px;
+}
+
+.form-musicas button{
+	margin-left: 10px;
+}
+
+div .musicas {
+	margin-top: 20px;
+}
+
+div .musicas table{
+	margin-left: 15px;
+}
+
+.botaoCircular{
+	height: 34px !important;
+	width: 35px !important;
+	border-radius: 34px !important;
+}
+
+#botaoDeRemoverPlaylist{
+	margin-left: 20px;
+}
+
+#botaoDeRemoverMusica{
+	margin-left: 4px;
+}
+
+#botaoDeRemoverMusica:hover{
+	opacity: 0.5;
+	cursor: pointer;
+}
