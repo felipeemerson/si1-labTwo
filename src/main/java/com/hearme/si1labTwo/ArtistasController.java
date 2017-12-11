@@ -1,39 +1,30 @@
 package com.hearme.si1labTwo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-@RestController
-@RequestMapping("/artistas")
+@Service
 public class ArtistasController {
 	
 	@Autowired
-	private Artista artistas;
+	private Artistas artistas;
 	
-	@GetMapping("/{id}")
-	public Artista buscar(@PathVariable Long id) {
-		return artistas.findOne(id);
+	
+	public Artista adicionaArtista(Artista artista) {
+		if(artistaNaoExiste(artista)) {
+			this.artistas.save(artista);
+		}
+		return artista;
 	}
 	
-	@GetMapping
-	public List<Artista> pesquisar(){
-		return artistas.findAll();
+	private boolean artistaNaoExiste(Artista artista) {
+		return !artistas.exists(artista.getId());
 	}
 	
-	@PostMapping
-	public Artista salvar(@RequestBody Artista artista) {
-		return artistas.save(artista);
+	public Artista procuraArtista(Long id) {
+		Artista artista = this.artistas.findOne(id);
+		return artista;
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletar(@PathVariable Long id) {
-		artistas.delete(id);
-	}
 
 }

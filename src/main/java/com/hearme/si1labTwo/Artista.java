@@ -45,6 +45,9 @@ public class Artista implements Serializable{
 		this.albuns = albuns;
 	}
 	
+	public Long getId() {
+		return this.id;
+	}
 	
 
 }
