@@ -152,3 +152,9 @@ div .musicas table{
 	opacity: 0.5;
 	cursor: pointer;
 }
+
+/* Style login */
+.input-group-addon { min-width: 110px; } // Or whatever width you want
+
+.input-group { width: 100%; }
+.login-link {cursor: pointer;}

@@ -19,19 +19,110 @@
         <script src="js/controller.js"></script>
     </head>
     <body ng-controller="hearMeController">
-        <div class="container">
+        <!-- LOGIN E REGISTRO DO USUÁRIO -->
+        <div class="container-login" ng-show="usuarioLogado == null">
+            <div class="logomarca" style="margin-top: 10%; margin-left: 41%;">
+                <h3 style="display: inline;">Bem vindo ao </h3><img src="img/logo.png" alt="Logo Hear.me" height="60px" width="60px" style="display: inline;"><h3 style="margin-left: 7px; display: inline;">Hear.me</h3>
+            </div>  
+            <div id="loginbox" style="margin-top:2%; margin-left: 33%" class="mainbox col-md-4 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <div class="panel-title" style="text-align: center"><h4>Login do usuário</h4></div>
+                    </div>     
+
+                    <div style="padding-top:30px" class="panel-body" >
+                        <form id="loginform" class="form-horizontal" role="form" ng-submit="fazerLogin()">
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon">Email</span>
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Email do usuário" ng-model="novoUsuarioLogin.emailLogin" required>                                        
+                            </div>                                    
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon">Senha</span>
+                                <input id="senha" pattern=".{6,}" type="password" class="form-control" name="senha" placeholder="Mínimo seis caracteres" ng-model="novoUsuarioLogin.senhaLogin" required>
+                            </div>
+                            <div style="margin-top:10px" class="form-group">
+                                <!-- Button -->
+                                <div class="col-sm-12 controls">
+                                    <button id="btn-login" type="submit" class="btn btn-primary">Entrar</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 control">
+                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                        Não tem conta? <!-- onclick="$('#loginbox').hide(); $('#signupbox').show()" -->
+                                        <a class="login-link" onclick="$('#loginbox').hide(); $('#signupbox').show()">
+                                            Registre-se
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>    
+                        </form>     
+                    </div>                     
+                </div>  
+            </div>
+            <div id="signupbox" style="display:none; margin-top:2%; margin-left: 35%" class="mainbox col-md-4 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title" style="text-align: center"><h4>Regristrar nova conta</h4></div> 
+                    </div>  
+                    <div class="panel-body" >
+                        <form id="signupform" class="form-horizontal" role="form" ng-submit="registrarUsuario()">                                                                                           
+                            <div class="input-group" style="margin-bottom: 20px; margin-top: 5px">
+                                <span class="input-group-addon">Email</span>
+                                <div>
+                                    <input type="email" class="form-control" name="email" placeholder="Endereço de email" ng-model="novoUsuario.email" required>
+                                </div>
+                            </div>                                   
+                            <div class="input-group" style="margin-bottom: 20px">
+                                <span class="input-group-addon">Nome</span>
+                                <div>
+                                    <input type="text" class="form-control" pattern=".{1,}" name="nome" placeholder="Mínimo um caractere" ng-model="novoUsuario.nome" required>
+                                </div>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 20px">
+                                <span class="input-group-addon">Senha</span>
+                                <div>
+                                    <input type="password" class="form-control" pattern=".{6,}" name="senha" placeholder="Mínimo seis caracteres" ng-model="novoUsuario.senha" required>
+                                </div>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 20px">
+                                <span class="input-group-addon">Repetir senha</span>
+                                <div>
+                                    <input type="password" class="form-control" pattern=".{6,}" name="repetirSenha" placeholder="Mínimo seis caracteres" ng-model="novoUsuario.senhaRepetida" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!-- Button -->                                        
+                                <div class="col-md-12 control">
+                                    <button id="btn-signup" type="submit" class="btn btn-primary">Registrar</button> <!--$('#signupbox').hide(); $('#loginbox').show()-->
+                                </div>
+                                <div class="login-link" style="float:right; font-size: 85%; position: relative; top:-10px; right: 20px"><a id="signinlink" onclick="$('#signupbox').hide(); $('#loginbox').show()">Entrar</a></div>
+                            </div>                                                                                             
+                        </form>
+                    </div>
+                </div>
+                </div> 
+            </div>
+
+        <!-- CONTEUDO -->
+        <div class="container" ng-hide="usuarioLogado == null">
             <!-- Barra de navegacao -->
             <nav class="navbar navbar-primary" style="margin-top: 10px">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <span style="font-size: large">Hear.me</span><img src="img/logo.png" alt="Logo">
+                        <span style="font-size: large; margin-right: 80px">Hear.me<img src="img/logo.png" alt="Logo"></span>
                     </div>
-                    <ul class="nav nav-tabs pull-right" role="tablist" style="margin-right: 40%">
+                    <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active" ><a href="#inicio" aria-controls="inicio" role="tab" data-toggle="tab">Início</a></li>
                         <li role="presentation"><a href="#artistas" aria-controls="artistas" role="tab" data-toggle="tab">Artistas</a></li>
                         <li role="presentation"><a href="#artistas-favoritos" aria-controls="artistas-favoritos" role="tab" data-toggle="tab">Favoritos</a></li>
                         <li role="presentation"><a href="#playlists" aria-controls="playlists" role="tab" data-toggle="tab">Playlists</a></li>
+                        <li class="pull-right">
+                            <a ng-click="usuarioLogado = null" href="" style=""><strong>Sair</strong></a>
+                        </li>
                     </ul>
+
                 </div>
             </nav>
             <!-- Conteudo -->
@@ -91,7 +182,7 @@
 
                 <!-- Inicio div #artistas -->
                 <div role="tabpanel" id="artistas" class="tab-pane fade">
-                    <div class="form-group row" ng-show="artistas.length > 0">
+                    <div class="form-group row" ng-show="usuarioLogado.artistas.length > 0">
                         <label class="col-sm-1">Pesquisar:</label>
                         <input class="col-sm-5" type="text" ng-model="pesquisa" placeholder="Nome do artista">
                     </div>
@@ -99,7 +190,7 @@
                     <div class="row">
                         <div class="gallery">
                             <!--Lista de artistas-->
-                            <div class="imgContainer" ng-repeat="artista in artistas | filter: {nome: pesquisa}">
+                            <div class="imgContainer" ng-repeat="artista in usuarioLogado.artistas | filter: {nome: pesquisa}">
                                 <a data-toggle="modal" data-target="#myModal{{artista.id}}">
                                     <h4 class="artista-link">{{artista.nome}}</h4>
                                     <img class="img-thumbnail" src="{{artista.imagemUrl}}" width="225px" height="225px">
@@ -137,7 +228,7 @@
                                                         <form ng-show="editingMusica" ng-submit="editingMusica = false; modificaUltimaMusica(artista);">
                                                             <select ng-model="ultimaMusica.nome">
                                                                 <option disabled selected value="">-- Selecione uma música --</option>
-                                                                <option ng-repeat="musica in musicasNoSistema" ng-if="musica.artista === $parent.artista.nome" value="{{musica.nome}}">{{musica.nome}}</option>
+                                                                <option ng-repeat="musica in usuarioLogado.musicasNoSistema" ng-if="musica.artista === $parent.artista.nome" value="{{musica.nome}}">{{musica.nome}}</option>
                                                             </select>
                                                             <button class="btn btn-success botaoCircular" type="submit">✔</button>
                                                         </form>
@@ -166,7 +257,7 @@
                     <div class="row">
                         <div class="gallery">
                             <!--Lista de artistas favoritos -->
-                            <div class="imgContainer" ng-repeat="artista in artistas | filter: {favorito: true}">
+                            <div class="imgContainer" ng-repeat="artista in usuarioLogado.artistas | filter: {favorito: true}">
                                 <a data-toggle="modal" data-target="#artistaFavorito{{artista.id}}">
                                     <h4 class="artista-link">{{artista.nome}}</h4>
                                     <img class="img-thumbnail" src="{{artista.imagemUrl}}" width="225px" height="225px">
@@ -204,7 +295,7 @@
                                                         <form ng-show="editingMusica" ng-submit="editingMusica = false; modificaUltimaMusica(artista);">
                                                             <select ng-model="ultimaMusica.nome">
                                                                 <option disabled selected value="">-- Selecione uma música --</option>
-                                                                <option ng-repeat="musica in musicasNoSistema" ng-if="musica.artista === $parent.artista.nome" value="{{musica.nome}}">{{musica.nome}}</option>
+                                                                <option ng-repeat="musica in usuarioLogado.musicasNoSistema" ng-if="musica.artista === $parent.artista.nome" value="{{musica.nome}}">{{musica.nome}}</option>
                                                             </select>
                                                             <button class="btn btn-success botaoCircular" type="submit">✔</button>
                                                         </form>
@@ -237,9 +328,9 @@
                     </form>
                     <!--Lista de playlists -->
                     </br>
-                    <div ng-show="playlists.length > 0">
+                    <div ng-show="usuarioLogado.playlists.length > 0">
                       <h3><b>Suas playlists:</b></h3>
-                      <div class="playlists" ng-repeat="playlist in playlists">
+                      <div class="playlists" ng-repeat="playlist in usuarioLogado.playlists">
                           <table>
                               <tr>
                                   <td>
@@ -265,7 +356,7 @@
                                               <div clas="row">
                                                   <select ng-model="novaMusicaNaPlaylist.nome">
                                                       <option disabled selected value="">-- Selecione uma música --</option>
-                                                      <option ng-repeat="musica in musicasNoSistema" value="{{musica.nome}}">{{musica.nome}}</option>
+                                                      <option ng-repeat="musica in usuarioLogado.musicasNoSistema" value="{{musica.nome}}">{{musica.nome}}</option>
                                                   </select>
                                                   <button class="btn btn-success" type="submit">✚ Adicionar</button>
                                               </div>
